@@ -10,8 +10,8 @@ namespace FlightTest
         [Fact]
         public void Test1()
         {
-            var flight = new Flight(seatCapacity: 3);
-
+            var flight = new Flight( 3);
+            
             flight.Book("email", 1);
 
            flight.RemainingNumberOfSeats.Should().Be(2);
