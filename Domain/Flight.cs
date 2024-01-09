@@ -1,5 +1,5 @@
-﻿namespace Domain.Tests
-  
+﻿namespace Domain
+
 {
     public class Flight
     {
@@ -8,21 +8,23 @@
         public int RemainingNumberOfSeats { get; set; }
         public Flight(int seatCapacity)
         {
-            
+
             RemainingNumberOfSeats = seatCapacity;
         }
 
-        public void Book(string v1,int newPassengers)
+        public object? Book(string passengerEmail, int newPassengers)
         {
 
-            if (RemainingNumberOfSeats==0)
+            if (RemainingNumberOfSeats == 0)
             {
                 Console.WriteLine("The flight is completely booked");
+                return new OverbookingError();
 
             }
             else if (newPassengers > RemainingNumberOfSeats)
             {
                 Console.WriteLine("Booking that many passengers would overbook the flight.");
+                return new OverbookingError();
             }
             else
             {
@@ -30,6 +32,7 @@
                 passengers += newPassengers;
                 RemainingNumberOfSeats -= newPassengers;
                 Console.WriteLine($"Your flight is now booked. There are {passengers} booked and  {RemainingNumberOfSeats} seats left");
+                return null;
             }
         }
 
